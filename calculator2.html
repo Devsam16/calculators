@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<div style="margin: auto; margin-top: 55px;">
+  <input type="number" id="num1" style="width: 75px; height: 24px;">
+  <select id="operator">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+    <option value="%">%</option>
+  </select>
+  <input type="number" id="num2" style="width: 75px; height: 24px;">
+  <button onclick="getsum()" style="background-color: blue; width: 75px; height: 34px; color: white;">Submit</button>
+  <p id="answer"></p>
+</div>
+
+
+
+<script>
+    function getsum() {
+  let num1 = document.getElementById("num1").value;
+  let operator = document.getElementById("operator").value;
+  let num2 = document.getElementById("num2").value;
+  let answer = document.getElementById('answer');
+
+  if (operator === "+") {
+    result = parseFloat(num1) + parseFloat(num2);
+  } else if (operator === "-") {
+    result = parseFloat(num1) - parseFloat(num2);
+  } else if (operator === "*") {
+    result = parseFloat(num1) * parseFloat(num2);
+  } else if (operator === "/") {
+    result = parseFloat(num1) / parseFloat(num2);
+  } else if (operator === "%") {
+    alert( 'invalid input')
+  };
+
+  console.log(result);
+  answer.innerHTML += `Answer: ${result}` + '<br>';
+  document.getElementById('num1').value = '';
+  document.getElementById('num2').value = '';
+};
+</script>
+
+</body>
+</html>

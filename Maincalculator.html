@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    position: relative;
+    width: 350px;
+    height: 500px;
+    background-color:burlywood;
+    border-radius: 5%;
+    margin: auto;
+    margin-top: 55px;
+    
+}
+.header-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.header-container1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+.header-left{
+    gap: 5px;
+    display: flex;
+    color: white;
+}
+.header-right{
+    gap: 15px;
+    display: flex; 
+    justify-content: space-between;
+    color: white;
+}
+.header-container2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+.header-left2{
+    display: flex;
+    gap: 15px;
+    color: white;
+}
+.header-right2{
+    color: white;
+}
+.inputs{
+    margin-top: 7px;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#firstdisplay{
+    width: 315px;
+    height: 30px;
+    border: none;
+    text-align: right;
+
+}
+#seconddisplay{
+    width: 315px;
+    height: 30px;
+    border: none;
+    text-align: right;
+}
+.list{
+    padding: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.list ul{
+    color: white;
+    display: flex;
+    gap: 1em;
+    list-style: none;
+    justify-content: space-between;
+
+}
+.numbers{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+}
+.numbers button{
+    background-color: white;
+    width: 70px;
+    height: 35px;
+    margin: auto;
+    border-radius: 7px;
+    border: thin solid grey;
+}
+.numbers button:hover{
+    background-color: rgba(255, 255, 255, 0.384);
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-wrapper">
+        <div class="header-container1">
+            <div class="header-left">
+                <i class="fa-solid fa-calculator"></i>
+                <p>Calculator</p>
+            </div>
+            <div class="header-right">
+                <h2>-</h2>
+                <h2><i class="fa-solid fa-floppy-disk"></i></h2>
+                <h2>X</h2>
+            </div>
+        </div>
+        <div class="header-container2">
+            <div class="header-left2">
+                <h2><i class="fa-solid fa-bars"></i></h2>
+                <h2>Standard</h2>
+                <h2><i class="fa-solid fa-maximize"></i></h2>
+            </div>
+            <div class="header-right2">
+                <h2><i class="fa-solid fa-clock"></i></h2>
+            </div>
+        </div>
+    </div>
+    <div class="inputs">
+        <input type="text" id="firstdisplay" readonly>
+        <input type="text" id="seconddisplay" readonly placeholder="0">
+    </div>
+    <div class="list">
+        <ul>
+            <li>MC</li>
+            <li>MR</li>
+            <li>M+</li>
+            <li>M-</li>
+            <li>MS</li>
+            <li>M-</li>
+        </ul>
+    </div>
+    <div class="numbers">
+        <button onclick="operator('%')">%</button>
+        <button onclick="clearEntry()">CE</button>
+        <button onclick="clearAll()">C</button>
+        <button onclick="backspace()">←</button>
+        <button onclick="operator('1/x')">1/x</button>
+        <button onclick="operator('x^2')">x²</button>
+        <button onclick="operator('√')">√</button>
+        <button onclick="operator('/')">÷</button>
+        <button onclick="num('7')">7</button>
+        <button onclick="num('8')">8</button>
+        <button onclick="num('9')">9</button>
+        <button onclick="operator('*')">×</button>
+        <button onclick="num('4')">4</button>
+        <button onclick="num('5')">5</button>
+        <button onclick="num('6')">6</button>
+        <button onclick="operator('-')">−</button>
+        <button onclick="num('1')">1</button>
+        <button onclick="num('2')">2</button>
+        <button onclick="num('3')">3</button>
+        <button onclick="operator('+')">+</button>
+        <button onclick="operator('+')">+</button>
+        <button onclick="num('0')">0</button>
+        <button onclick="decimal()">.</button>
+        <button onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    let firstDisplay = document.getElementById('firstdisplay');
+    let secondDisplay = document.getElementById('seconddisplay');
+    let currentOperator = '';
+    let firstOperand = '';
+    let secondOperand = '';
+
+    function num(value) {
+        secondDisplay.value += value;
+    }
+
+    function operator(op) {
+        if (secondDisplay.value !== '') {
+            firstOperand = secondDisplay.value;
+            currentOperator = op;
+            firstDisplay.value = `${firstOperand} ${currentOperator}`;
+            secondDisplay.value = '';
+        }
+    }
+
+    function clearAll() {
+        firstDisplay.value = '';
+        secondDisplay.value = '';
+        firstOperand = '';
+        secondOperand = '';
+        currentOperator = '';
+    }
+
+    function clearEntry() {
+        secondDisplay.value = '';
+    }
+
+    function backspace() {
+        secondDisplay.value = secondDisplay.value.slice(0, -1);
+    }
+
+    function decimal() {
+        if (!secondDisplay.value.includes('.')) {
+            secondDisplay.value += '.';
+        }
+    }
+    
+    function calculate() {
+    if (firstOperand && currentOperator && secondDisplay.value) {
+        secondOperand = secondDisplay.value;
+        let result = 0;
+
+        if (currentOperator === '+') {
+            result = parseFloat(firstOperand) + parseFloat(secondOperand);
+        } else if (currentOperator === '-') {
+            result = parseFloat(firstOperand) - parseFloat(secondOperand);
+        } else if (currentOperator === '*') {
+            result = parseFloat(firstOperand) * parseFloat(secondOperand);
+        } else if (currentOperator === '/') {
+            result = parseFloat(firstOperand) / parseFloat(secondOperand);
+        } else if (currentOperator === '%') {
+            result = parseFloat(firstOperand) % parseFloat(secondOperand);
+        } else if (currentOperator === 'x^2') {
+            result = Math.pow(parseFloat(firstOperand), 2);
+        } else if (currentOperator === '√') {
+            result = Math.sqrt(parseFloat(firstOperand));
+        } else if (currentOperator === '1/x') {
+            result = 1 / parseFloat(firstOperand);
+        }
+
+        firstDisplay.value = `${firstOperand} ${currentOperator} ${secondOperand}`;
+        secondDisplay.value = result;
+
+       
+        firstOperand = '';
+        secondOperand = '';
+        currentOperator = '';
+    }
+}
+
+
+    
+</script>
+</body>
+</html>
